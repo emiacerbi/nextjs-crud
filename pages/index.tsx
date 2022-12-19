@@ -1,6 +1,20 @@
+import axios from 'axios'
 import Head from 'next/head'
 
+const BASE_URL = 'http://localhost:3000'
+
 export default function Home() {
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
+
+    const result = await axios.post(BASE_URL + '/api/products', {
+      name: 'test',
+      description: 'description',
+      price: 100,
+    })
+
+    console.log(result)
+  }
   return (
     <>
       <Head>
@@ -9,7 +23,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>Setup</main>
+      <main>
+        Setup
+        <form onSubmit={handleSubmit}>
+          <button type="submit">Submit</button>
+        </form>
+      </main>
     </>
   )
 }
