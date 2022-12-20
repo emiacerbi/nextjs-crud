@@ -39,7 +39,9 @@ const createProudct = async (req: NextApiRequest, res: NextApiResponse) => {
     )
 
     return res.status(200).json({ ...req.body, id: result.insertId })
-  } catch (error: any) {
-    return res.status(500).json({ message: error.message })
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({ message: error.message })
+    }
   }
 }
